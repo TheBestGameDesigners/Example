@@ -10,6 +10,18 @@ var MemoryGame = MemoryGame || {};
  */
 MemoryGame = function(gs) {
 	this.gs = gs;
+	this.arrayPosibilidades = new Array(8);
+		this.arrayPosibilidades[0] = "8-ball";
+		this.arrayPosibilidades[1] = "potato";
+		this.arrayPosibilidades[2] = "dinosaur";
+		this.arrayPosibilidades[3] = "kronos";
+		this.arrayPosibilidades[4] = "rocket";
+		this.arrayPosibilidades[5] = "unicorn";
+		this.arrayPosibilidades[6] = "guy";
+		this.arrayPosibilidades[7] = "zeppelin";
+		this.arrayIntroducidas = new Array(8);
+		for(var i = 0; i < 8 ; i++)
+			this.arrayIntroducidas[i] = 0;
 	
 };
 //***********************************************************************************************************
@@ -33,33 +45,22 @@ MemoryGame.Card = function(id) {
 MemoryGame.prototype = {
 
 	initGame: function(){
-		this.arrayPosibilidades = new Array(8);
-		this.arrayPosibilidades[0] = "8-ball";
-		this.arrayPosibilidades[1] = "potato";
-		this.arrayPosibilidades[2] = "dinosaur";
-		this.arrayPosibilidades[3] = "kronos";
-		this.arrayPosibilidades[4] = "rocket";
-		this.arrayPosibilidades[5] = "unicorn";
-		this.arrayPosibilidades[6] = "guy";
-		this.arrayPosibilidades[7] = "zeppelin";
-		this.arrayIntroducidas = new Array(8);
-		for(var i = 0; i < 8 ; i++)
-			this.arrayIntroducidas[i] = 0;
+		
 		this.numCartasEncontradas = 0;
 		this.mensaje = "iniciando juego";
 		this.comparaCartas = false;
 		this.idUltimaCarta;
 		this.arrayCartas = new Array();
-		var random;
+		var rand;
 		for(var i = 0; i < 16; i++){
-			//random = Math.random()%8;
-			if(this.arrayIntroducidas[random] < 2){
-				this.arrayCartas[i] = new MemoryGame.Card(this.arrayPosibilidades[2]);
-				this.arrayIntroducidas[random]++;
+			rand = Math.floor(Math.random()*7);
+			if(this.arrayIntroducidas[rand] < 2){
+				this.arrayCartas[i] = new MemoryGame.Card(this.arrayPosibilidades[rand]);
+				this.arrayIntroducidas[rand]++;
 			}
-			else
+			else{
 				i--;
-			//this.arrayCartas[i] = new MemoryGame.Card("kronos");
+			}
 		}
 		
 		this.loop();
